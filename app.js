@@ -13,8 +13,13 @@ app.get("/", (req, res) => {
             const weatherData = JSON.parse(data);
             const temp = weatherData.main.temp;
             const weatherDesc = weatherData.weather[0].description;
+            const icon = weatherData.weather[0].icon;
+            const imageURL = "http://openweathermap.org/img/wn/" + icon + ".png";
 
-            res.send("The current temperature in Lancaster, CA is " + temp + " fahrenheit, with " + weatherDesc + " conditions.");
+            res.write("<h1>The current temperature in Lancaster, CA is " + temp + " Fahrenheit</h1>");
+            res.write("<p>The weather is currently " + weatherDesc + "</p>");
+            res.write("<img src=" + imageURL + ">");
+            res.send();
         });
     });
 });
